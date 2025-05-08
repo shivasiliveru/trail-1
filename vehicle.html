@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Kisan Saathi</div>
+    <ul class="nav-links">
+      <li><a href="seeds.html">Seeds Booking</a></li>
+      <li><a href="vehicle.html">Vehicles Booking</a></li>
+      <li><a href="suggestion.html">Crop Suggestions</a></li>
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </nav>
+  <title>Agricultural Vehicle Booking</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #f5f5f5;
+      }
+      .vehicle {
+          border: 1px solid #ddd;
+          padding: 15px;
+          margin-bottom: 15px;
+          border-radius: 5px;
+          background-color: white;
+          display: flex;
+          gap: 20px;
+      }
+      .vehicle-image {
+          width: 200px;
+          height: 150px;
+          background-color: #eee;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 4px;
+      }
+      .vehicle-info {
+          flex: 1;
+      }
+      .vehicle-image-placeholder {
+          color: #999;
+          text-align: center;
+          padding: 10px;
+      }
+      button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-top: 10px;
+      }
+      #total-section {
+          margin-top: 30px;
+          padding: 20px;
+          background-color: white;
+          border-radius: 5px;
+      }
+      .action-buttons {
+          display: flex;
+          gap: 10px;
+          margin-top: 15px;
+      }
+  </style>
+</head>
+<body>
+  <h1>Agricultural Vehicle Booking</h1>
+  
+  <!-- <?php
+  /* PHP CODE TO GET VEHICLES FROM DATABASE WOULD GO HERE
+  Example:
+  $conn = new mysqli("localhost", "username", "password", "database");
+  $result = $conn->query("SELECT * FROM vehicles");
+  while($row = $result->fetch_assoc()) {
+      echo '<div class="vehicle">';
+      echo '<div class="vehicle-image">';
+      echo '<img src="'.$row['image_path'].'" alt="'.$row['name'].'" style="max-width:100%; max-height:100%;">';
+      echo '</div>';
+      echo '<div class="vehicle-info">';
+      echo '<h3>'.$row['name'].'</h3>';
+      echo '<p>Price: ₹'.$row['price'].' per hour</p>';
+      echo '<label>Hours: <input type="number" class="hours" min="1" value="1" data-price="'.$row['price'].'"></label>';
+      echo '<button onclick="calculateTotal()">Add to Booking</button>';
+      echo '</div>';
+      echo '</div>';
+  }
+  */
+  ?> -->
+  
+  <!-- TEMPORARY HARDCODED VEHICLES (REPLACE WITH PHP ABOVE) -->
+  <div class="vehicle">
+      <div class="vehicle-image">
+          <!-- Developer: Replace this div with actual image tag -->
+          <!-- <img src="images/tractor.jpg" alt="Tractor" style="max-width:100%; max-height:100%;"> -->
+          <div class="vehicle-image-placeholder">Tractor Image Here</div>
+      </div>
+      <div class="vehicle-info">
+          <h3>Tractor (Mahindra 575 DI)</h3>
+          <p>Price: ₹500 per hour</p>
+          <label>Hours: <input type="number" class="hours" min="1" value="1" data-price="500"></label>
+          <button onclick="calculateTotal()">Add to Booking</button>
+      </div>
+  </div>
+  
+  <div class="vehicle">
+      <div class="vehicle-image">
+          <!-- Developer: Replace this div with actual image tag -->
+          <!-- <img src="images/harvester.jpg" alt="Harvester" style="max-width:100%; max-height:100%;"> -->
+          <div class="vehicle-image-placeholder">Harvester Image Here</div>
+      </div>
+      <div class="vehicle-info">
+          <h3>Harvester (John Deere 1050)</h3>
+          <p>Price: ₹1200 per hour</p>
+          <label>Hours: <input type="number" class="hours" min="1" value="1" data-price="1200"></label>
+          <button onclick="calculateTotal()">Add to Booking</button>
+      </div>
+  </div>
+  
+  <div id="total-section">
+      <h3>Booking Summary</h3>
+      <div id="total">Total: ₹0</div>
+      <form id="booking-form" method="post" action="process_booking.php">
+          <input type="hidden" name="total_amount" id="total-amount" value="0">
+          <div class="action-buttons">
+              <button type="submit" id="payment-btn">Make Payment</button>
+              <button type="button" id="reset-btn" onclick="resetTotal()">Reset Total</button>
+          </div>
+      </form>
+  </div>
+  
+  <script>
+      function calculateTotal() {
+          const hourInputs = document.querySelectorAll('.hours');
+          let total = 0;
+          
+          hourInputs.forEach(input => {
+              const hours = parseInt(input.value) || 0;
+              const price = parseInt(input.dataset.price) || 0;
+              total += hours * price;
+          });
+          
+          document.getElementById('total').textContent = `Total: ₹${total}`;
+          document.getElementById('total-amount').value = total;
+      }
+      
+      function resetTotal() {
+          document.getElementById('total').textContent = 'Total: ₹0';
+          document.getElementById('total-amount').value = 0;
+          document.querySelectorAll('.hours').forEach(input => {
+              input.value = 1;
+          });
+      }
+  </script>
+</body>
+</html> 
